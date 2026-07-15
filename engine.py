@@ -166,6 +166,21 @@ def original_from_page(link, site):
 
     soup = download(link)
 
+
+    parser = site.get("original_parser", "selector")
+
+    if parser == "meta_description":
+        tag = soup.select_one('meta[name="description"]')
+
+    if tag:
+        text = tag.get("content", "").strip()
+
+        if " is " in text:
+            return text.split(" is ", 1)[0]
+
+        return text
+
+
     tag = first(
         soup,
         site["selectors"]["original"]
