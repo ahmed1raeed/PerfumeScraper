@@ -1,4 +1,4 @@
 from engine import scrape
-from sites.mixi import SITE
+from sites.cozy import SITE
 
 scrape(SITE)
